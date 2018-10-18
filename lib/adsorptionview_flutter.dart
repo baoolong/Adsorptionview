@@ -6,6 +6,7 @@ typedef Widget GetHearWidget<M extends AdsorptionData>(M bin);
 typedef Widget GetGeneralItem<M extends AdsorptionData>(M bin);
 
 class AdsorptionView<T extends AdsorptionData> extends StatefulWidget {
+
   final List<T> adsorptionDatas;
   final GetHearWidget<T> headChild;
   final GetGeneralItem<T> generalItemChild;
@@ -22,8 +23,11 @@ class AdsorptionView<T extends AdsorptionData> extends StatefulWidget {
     this.itemWidth: double.infinity,
     this.cacheExtent: 30.0,
     @required this.isEqualHeightItem,
-  }) : assert(adsorptionDatas != null,
-            generalItemChild != null && headChild != null,);
+  }) : assert(
+    adsorptionDatas != null,
+    generalItemChild != null &&
+    headChild != null,
+  );
 
   @override
   State<StatefulWidget> createState() {
@@ -36,13 +40,14 @@ class AdsorptionView<T extends AdsorptionData> extends StatefulWidget {
 }
 
 ///此控件适用于固定高度的ListView
-class AdsorptionViewState<T extends AdsorptionData>
-    extends State<AdsorptionView<T>> {
+class AdsorptionViewState<T extends AdsorptionData> extends State<AdsorptionView<T>> {
+
   ScrollController scrollController = new ScrollController();
   double headerOffset = 0.0;
   T headerStr;
   GlobalKey key = new GlobalKey();
   double beforeScroll = 0.0;
+  ScrollPhysics scrollPhysics=new ClampingScrollPhysics();
 
   @override
   void initState() {
@@ -92,6 +97,7 @@ class AdsorptionViewState<T extends AdsorptionData>
     return new Stack(
       children: <Widget>[
         new ListView.builder(
+          physics: scrollPhysics,
           cacheExtent: widget.cacheExtent,
           controller: scrollController,
           itemCount: widget.adsorptionDatas.length,
