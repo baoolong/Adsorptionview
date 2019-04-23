@@ -2,9 +2,9 @@
 
 [![pub package](https://img.shields.io/pub/v/adsorptionview_flutter.svg)](https://pub.dartlang.org/packages/adsorptionview_flutter)
 
-ListView adsorption ceiling layout, support Equally high items and Unequally high items.
+ListView adsorption ceiling layout, only support Equally high items.
 
-ListView的吸顶布局，现在支持等高和非等高的Item。
+ListView的吸顶布局，现在仅支持等高和非等高的Item。
 
 HomePage：[https://github.com/baoolong/Adsorptionview](https://github.com/baoolong/Adsorptionview)
 
@@ -17,7 +17,7 @@ MoreWidght：[https://github.com/OpenFlutter/PullToRefresh](https://github.com/O
 Add this to your package's pubspec.yaml file:
 
 	dependencies:
-	  adsorptionview_flutter: ^0.1.2
+	  adsorptionview_flutter: ^0.1.3
 	  
 Add it to your dart file:
 
@@ -163,7 +163,6 @@ And ListView dataBin must extends AdsorptionData ,Add it to your dataBin file
             title: new Text("吸附布局"),
           ),
           body:new AdsorptionView(
-            isEqualHeightItem: true,
             adsorptionDatas: adsorptionDatas,
             generalItemChild: (AdsorptionListBin bin) {
               return new Container(

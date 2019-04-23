@@ -1,6 +1,6 @@
 name: adsorptionview_flutter
 description: ListView adsorption ceiling layout, support Equally high items and Unequally high items.
-version: 0.1.2
+version: 0.1.3
 author: baoolong <baoolong1987@gmail.com>
 homepage: https://github.com/baoolong/Adsorptionview
 

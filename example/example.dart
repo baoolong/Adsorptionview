@@ -126,7 +126,6 @@ class AdsorptionViewState extends State<AdsorptionViewDemo>{
         title: new Text("吸附布局"),
       ),
       body:new AdsorptionView(
-        isEqualHeightItem: true,
         adsorptionDatas: adsorptionDatas,
         generalItemChild: (AdsorptionListBin bin) {
           return new Container(
