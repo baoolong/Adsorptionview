@@ -4,7 +4,7 @@
 
 ListView adsorption ceiling layout, only support Equally high items.
 
-ListView的吸顶布局，现在仅支持等高和非等高的Item。
+ListView的吸顶布局，现在仅支持等高的Item。
 
 HomePage：[https://github.com/baoolong/Adsorptionview](https://github.com/baoolong/Adsorptionview)
 
