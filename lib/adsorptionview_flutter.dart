@@ -10,6 +10,7 @@ class AdsorptionView<T extends AdsorptionData> extends StatefulWidget{
   final List<T> adsorptionDatas;
   final GetHearWidget<T> headChild;
   final GetGeneralItem<T> generalItemChild;
+  final int initialIndex;
   final double itemHeight;
   final double itemWidth;
   final double cacheExtent;
@@ -18,6 +19,7 @@ class AdsorptionView<T extends AdsorptionData> extends StatefulWidget{
     @required this.adsorptionDatas,
     @required this.headChild,
     @required this.generalItemChild,
+    this.initialIndex:0,
     this.itemHeight:50.0,
     this.itemWidth:double.infinity,
     this.cacheExtent:30.0,
@@ -36,7 +38,20 @@ class AdsorptionView<T extends AdsorptionData> extends StatefulWidget{
 ///此控件适用于固定高度的ListView
 class AdsorptionViewState<T extends AdsorptionData> extends State<AdsorptionView<T>>{
 
-  ScrollController scrollController=new ScrollController();
+  ScrollController scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    var initialScrollOffset = 0.0;
+    
+    if(widget.initialIndex >= 1) {
+      initialScrollOffset = (widget.initialIndex - 1) * widget.itemHeight;
+    }
+
+    scrollController = new ScrollController(initialScrollOffset: initialScrollOffset);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +80,7 @@ class AdsorptionViewState<T extends AdsorptionData> extends State<AdsorptionView
           child: new HeaderView(
             scrollController: scrollController,
             headChild: widget.headChild,
+            initialIndex: widget.initialIndex,
             adsorptionDatas: widget.adsorptionDatas,
             itemWidth: widget.itemWidth,
             itemHeight: widget.itemHeight,
@@ -141,6 +157,7 @@ class HeaderView<T extends AdsorptionData> extends StatefulWidget{
   final ScrollController scrollController;
   final double itemHeight;
   final double itemWidth;
+  final int initialIndex;
   final GetHearWidget<T> headChild;
   final List<T> adsorptionDatas;
 
@@ -148,6 +165,7 @@ class HeaderView<T extends AdsorptionData> extends StatefulWidget{
     @required this.scrollController,
     this.itemHeight:50.0,
     this.itemWidth:double.infinity,
+    this.initialIndex:0,
     @required this.headChild,
     @required this.adsorptionDatas,
   });
@@ -165,7 +183,14 @@ class HeaderViewState<T extends AdsorptionData> extends State<HeaderView<T>>{
 
   @override
   void initState() {
-    headerStr=widget.adsorptionDatas.first;
+    var headerIndex = 0;
+    for(int i=widget.initialIndex; i>=0; i--) {
+      if(widget.adsorptionDatas[i].isHeader) {
+        headerIndex = i;
+        break;
+      }
+    }
+    headerStr=widget.adsorptionDatas[headerIndex];
 
     widget.scrollController.addListener((){
       //计算滑动了多少距离了
